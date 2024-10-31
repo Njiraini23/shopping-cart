@@ -1,6 +1,15 @@
+import { useNavigate } from "react-router-dom";
 
 
 function ProductTile({singleProductTile}){
+
+    const navigate = useNavigate();
+
+    function handleNavigateToProductDetailsPage(getCurrentProductId){
+        navigate(`/product-details/${getCurrentProductId}`); 
+    }
+
+
     return <div className="relative group border border-cyan 700 p-6 cursor-pointer">
         <div className="overflow-hidden aspect-w-1 aspect-h-1">
             <img  
@@ -18,7 +27,7 @@ function ProductTile({singleProductTile}){
                 <p className="text-xs font-bold text-white-900 sm:text-sm md:text-[14px]">${singleProductTile?.price}</p>
              </div>
         </div>
-        <button onClick={handleNavigateToProductDetailsPage} className="px-5 mt-5 w-full py-2 rounded-none bg-black text-white font-bold text-lg">View Details</button>
+        <button onClick={()=> handleNavigateToProductDetailsPage(singleProductTile?.id) } className="px-5 mt-5 w-full py-2 rounded-none bg-black text-white font-bold text-lg">View Details</button>
     </div>
 }
 export default ProductTile;
