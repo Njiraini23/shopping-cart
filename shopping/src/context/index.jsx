@@ -54,7 +54,8 @@ function ShoppingCartProvider({children}){
     }
 
    useEffect(()=>{
-    fetchListOfProducts()
+    fetchListOfProducts();
+    setCartItems(JSON.parse(localStorage.getItem('cartItems') || []))
    }, []);
    
    console.log(cartItems);
