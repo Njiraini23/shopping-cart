@@ -42,9 +42,13 @@ function ShoppingCartProvider({children}){
                 ...getProductDetails,
                 quantity : 1,
                 totalPrice: getProductDetails?.price
-            })
+            });
         } else {
-
+            cpyExistingCartItems[findIndexOfCurrentItem] = {
+                ...cpyExistingCartItems[findIndexOfCurrentItem], 
+                quantity : cpyExistingCartItems[findIndexOfCurrentItem].quantity + 1, 
+                totalPrice : (cpyExistingCartItems[findIndexOfCurrentItem].quantity + 1) * cpyExistingCartItems[findIndexOfCurrentItem].price,    
+            }
         }
         console.log(cpyExistingCartItems, "cpyExistingCartItems");
         setCartItems(cpyExistingCartItems);

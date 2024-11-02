@@ -1,9 +1,10 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
+import { ShoppingCartContext } from "../../context";
 
 
 function CartTile({singleCartItem}){
 
-    const {handleRemoveFromCart} = useContext(ShoppingCartContext); 
+    const {handleRemoveFromCart, handleAddToCart} = useContext(ShoppingCartContext); 
     
     return (
         <Fragment>
@@ -26,9 +27,16 @@ function CartTile({singleCartItem}){
             <h3 className="text-lg font-bold text-white-900">
                 ${singleCartItem.totalPrice.toFixed(2)}
             </h3>
+            <p className="mt-2 mb-3 font-bold text-[16px]">
+                Quantity: {singleCartItem?.quantity} </p>
             <div className="mt-3">
-                <button onClick={()=>handleRemoveFromCart(singleCartItem, false)} className="border border-[#000]">-</button>
-                <button className="border border-[#000]">+</button>
+                <button onClick={()=>handleRemoveFromCart(singleCartItem, false)} 
+                className="disabled:opacity-65 border border-[#000]"
+                disabled={singleCartItem?.quantity === 1}
+                >
+                    -
+                </button>
+                <button onClick={()=>handleAddToCart(singleCartItem)} className="border border-[#000]">+</button>
             </div>
         </div>
     </div>
