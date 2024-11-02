@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ShoppingCartContext } from "../../context";
 
 
+
 function ProductTile({singleProductTile}){
 
     const navigate = useNavigate();
@@ -38,7 +39,7 @@ function ProductTile({singleProductTile}){
         <button
         disabled={
             cartItems.findIndex(item=>item.id === singleProductTile.id)>
-             -1
+             -1 
             }  
         onClick={()=> handleAddToCart(singleProductTile)} 
         className="disabled:opacity-65 px-5 mt-5 w-full py-2 rounded-none bg-black text-white font-bold text-lg">

@@ -72,8 +72,9 @@ function ProductDetailsPage(){
                         <div>
                             <button
                             disabled={
+                                productDetails ?
                                 cartItems.findIndex(item=>item.id === productDetails.id)>
-                                 -1
+                                 -1 : false
                                 } 
                             onClick={()=>handleAddToCart(productDetails)} 
                             className="disabled:opacity-65 mt-5 min-w-[200px] px-4 py-3 border border-white bg-transparent text-sm font-semibold rounded"
