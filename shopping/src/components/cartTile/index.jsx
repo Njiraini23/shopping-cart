@@ -2,6 +2,8 @@ import { Fragment } from "react";
 
 
 function CartTile({singleCartItem}){
+
+    const {handleRemoveFromCart} = useContext(ShoppingCartContext); 
     
     return (
         <Fragment>
@@ -15,7 +17,7 @@ function CartTile({singleCartItem}){
             </div>
             <div>
                 <h3 text-base font-bold text-gray-900>{singleCartItem?.title} </h3>
-                <button className="text-sm px-4 py-3 bg-black text-white font-extrabold">
+                <button onClick={()=>handleRemoveFromCart(singleCartItem, true)} className="text-sm px-4 py-3 bg-black text-white font-extrabold">
                     Remove
                     </button>
             </div>
@@ -25,7 +27,7 @@ function CartTile({singleCartItem}){
                 ${singleCartItem.totalPrice.toFixed(2)}
             </h3>
             <div className="mt-3">
-                <button className="border border-[#000]">-</button>
+                <button onClick={()=>handleRemoveFromCart(singleCartItem, false)} className="border border-[#000]">-</button>
                 <button className="border border-[#000]">+</button>
             </div>
         </div>

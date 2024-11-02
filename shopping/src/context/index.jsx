@@ -53,6 +53,24 @@ function ShoppingCartProvider({children}){
         
     }
 
+    function handleRemoveFromCart(getProductDetails, isFullyRemovedFromCart){
+        let cpyExistingCartItems = [...cartItems];
+        const findIndexOfCurrentItem = cpyExistingCartItems.findIndex(item=>item.id === getProductDetails.id);
+
+        if(isFullyRemovedFromCart) {
+            cpyExistingCartItems.splice(findIndexOfCurrentItem, 1)
+        } else {
+            cpyExistingCartItems[findIndexOfCurrentItem] = {
+                ...cpyExistingCartItems[findIndexOfCurrentItem],
+                quantity : cpyExistingCartItems[findIndexOfCurrentItem].quantity - 1,
+                totalPrice : (cpyExistingCartItems[findIndexOfCurrentItem].quantity - 1) * cpyExistingCartItems[findIndexOfCurrentItem].price,
+            };
+        }
+
+        localStorage.setItem('cartItems', JSON.stringify(cpyExistingCartItems));
+        setCartItems(cpyExistingCartItems);
+    }
+
    useEffect(()=>{
     fetchListOfProducts();
     setCartItems(JSON.parse(localStorage.getItem('cartItems') || []))
@@ -69,7 +87,9 @@ function ShoppingCartProvider({children}){
         setProductDetails,
         handleAddToCart,
         cartItems, 
-        }}>
+        handleRemoveFromCart,
+        }}
+        >
         {children}
         </ShoppingCartContext.Provider>
 }
